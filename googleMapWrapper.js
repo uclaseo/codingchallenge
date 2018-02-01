@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_KEY = require('./API_KEY');
+const API_KEY = require('./API_KEY.js');
 const getDistance = (origin, destination, time) => {
   const BASE_URL = 'https://maps.googleapis.com/maps/api/distancematrix';
   const outputFormat = 'json?';
@@ -19,6 +19,7 @@ const getDistance = (origin, destination, time) => {
     .get(query)
     .then(response => {
       let result = response.data.rows[0].elements[0].distance.text;
+      console.log(result);
       return result;
     })
     .catch(error => {
