@@ -1,4 +1,5 @@
 // nodeJS script
+// node findAllFiles.js ./website html \<a\ href=\"shittylistings.com\"\>
 
 const path = require('path');
 const fs = require('fs');
@@ -28,6 +29,9 @@ const findAllFiles = (directory, extension, filter) => {
   };
 
   recurse(directory);
+
+  const fileListWithBreaks = fileList.join('\n');
+  fs.appendFileSync('list.txt', fileListWithBreaks, 'utf8');
   return fileList;
 };
 
@@ -36,7 +40,5 @@ const extension = process.argv[3];
 const filter = process.argv[4];
 
 
+findAllFiles(directory, extension, filter);
 
-
-// console.log(findAllFiles('./website', '.html', 'shittylistings.com'));
-console.log(findAllFiles(directory, extension, filter));
