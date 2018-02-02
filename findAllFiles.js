@@ -28,4 +28,6 @@ const findAllFiles = (directory, extension, filter) => {
   return fileList;
 };
 
-console.log(findAllFiles('./webpage', 'html', 'shittylistings.com'));
+// console.log(findAllFiles('./webpage', 'html', 'shittylistings.com'));
+
+module.exports = findAllFiles;

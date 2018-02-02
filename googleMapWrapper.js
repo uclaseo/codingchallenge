@@ -19,17 +19,18 @@ const getDistance = (origin, destination, time) => {
     .get(query)
     .then(response => {
       let result = response.data.rows[0].elements[0].distance.text;
-      console.log(result);
-      return result;
+      return console.log(result);
     })
     .catch(error => {
       console.log(error);
     });
 };
 
-const nearbyAgent = '178 S Oxford Ave Los Angeles, CA 90004';
-const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
+// const nearbyAgent = '178 S Oxford Ave Los Angeles, CA 90004';
+// const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
 // 2018 Feb 04 10:30
-const appointment = new Date(2018, 1, 4, 10, 30);
+// const appointment = new Date(2018, 1, 4, 10, 30);
 
-getDistance(nearbyAgent, houseProperty, appointment);
+// getDistance(nearbyAgent, houseProperty, appointment);
+
+module.exports = getDistance;

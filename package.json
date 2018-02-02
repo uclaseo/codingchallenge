@@ -4,5 +4,14 @@
   "main": "index.js",
   "repository": "https://github.com/uclaseo/codingchallenge.git",
   "author": "inseok <inseok.ucla@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.17.1"
+  },
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
 }
