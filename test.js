@@ -1,8 +1,7 @@
+const fs = require('fs');
 const findArrayDimension = require('./findArrayDimension');
-const findAllFiles = require('./findAllFiles');
-const getDistance = require('./googleMapWrapper');
 
-describe('findArrayDimension finds correct dimensions', () => {
+describe('findArrayDimension', () => {
   test('Wrong input returns error string', () => {
     expect(findArrayDimension()).toBe('Input is not a valid array');
   });

@@ -15,22 +15,21 @@ const getDistance = (origin, destination, time) => {
   const departureTimeURL = `departure_time=${timeUTC}&`;
 
   const query = `${BASE_URL}/${outputFormat}${unitsURL}${originURL}${destinationURL}${departureTimeURL}key=${API_KEY}`;
-  axios
+
+  return axios
     .get(query)
     .then(response => {
       let result = response.data.rows[0].elements[0].distance.text;
-      return console.log(result);
+      return result;
     })
     .catch(error => {
       console.log(error);
     });
 };
 
-// const nearbyAgent = '178 S Oxford Ave Los Angeles, CA 90004';
-// const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
+const nearbyAgent = '178 S Oxford Ave Los Angeles, CA 90004';
+const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
 // 2018 Feb 04 10:30
-// const appointment = new Date(2018, 1, 4, 10, 30);
+const appointment = new Date(2018, 1, 4, 10, 30);
 
-// getDistance(nearbyAgent, houseProperty, appointment);
-
-module.exports = getDistance;
+const distance = getDistance(nearbyAgent, houseProperty, appointment).then(console.log);

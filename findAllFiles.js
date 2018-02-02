@@ -2,11 +2,6 @@ const path = require('path');
 const fs = require('fs');
 
 const findAllFiles = (directory, extension, filter) => {
-  fs.access(directory, error => {
-    if (error) {
-      console.log('Root Directory Does Not Exist');
-    }
-  });
   const fileList = [];
   const recurse = subDirectory => {
     const files = fs.readdirSync(subDirectory);
@@ -17,9 +12,11 @@ const findAllFiles = (directory, extension, filter) => {
       if (fileStat.isDirectory()) {
         recurse(filePath);
       } else {
-        const data = fs.readFileSync(filePath, 'utf8');
-        if (data.indexOf(filter) >= 0) {
-          fileList.push(filePath);
+        if (file.endsWith(extension)) {
+          const data = fs.readFileSync(filePath, 'utf8');
+          if (data.indexOf(filter) >= 0) {
+            fileList.push(filePath);
+          }
         }
       }
     });
@@ -28,6 +25,4 @@ const findAllFiles = (directory, extension, filter) => {
   return fileList;
 };
 
-// console.log(findAllFiles('./webpage', 'html', 'shittylistings.com'));
-
-module.exports = findAllFiles;
+console.log(findAllFiles('./webpage', '.html', 'shittylistings.com'));
