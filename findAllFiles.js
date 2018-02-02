@@ -2,6 +2,8 @@ const path = require('path');
 const fs = require('fs');
 
 const findAllFiles = (directory, extension, filter) => {
+  // Usually, asynchronous functions are preferred to synchronous.
+  // But for the purpose of this assignment, there is no reason to use asynchronous, and make the code more complex.
   if (!fs.existsSync(directory)) {
     return 'The Folder Does Not Exist';
   }

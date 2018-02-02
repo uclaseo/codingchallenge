@@ -19,10 +19,6 @@ const findDimension = array => {
   return recurse(array, maxDimension);
 };
 
-// const array = [1, 1, 1, [2], [2, 2, 2], 1, [2, [3], [3], 2, [3, [4, 'hello', 4, [5]], 3], 2], 1];
-
-// console.log(findDimension(array));
-
 // time complexity: O(n^2)
 // space complexity: O(n)
 

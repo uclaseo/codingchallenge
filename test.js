@@ -28,4 +28,10 @@ describe('findArrayDimension', () => {
     expect(findArrayDimension([1, [2, [3]]])).toBe(3);
     expect(findArrayDimension([1, 1, [2], [2], [2, 2, [3]], [2], 1])).toBe(3);
   });
+
+  test('Any type of data is valid', () => {
+    expect(findArrayDimension(['1', 1, { bar: 'foo' }])).toBe(1);
+    expect(findArrayDimension(['1', [2, { bar: 'foo' }, [3, [null]], '2']])).toBe(4);
+    expect(findArrayDimension(['1', [2, { bar: 'foo' }, [3, [null, [undefined]]], '2']])).toBe(5);
+  });
 });
