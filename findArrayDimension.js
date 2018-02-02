@@ -23,7 +23,7 @@ const findDimension = array => {
 
 // console.log(findDimension(array));
 
-// time complexity: O(2^n)
+// time complexity: O(n^2)
 // space complexity: O(n)
 
 module.exports = findDimension;
