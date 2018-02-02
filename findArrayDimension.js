@@ -1,4 +1,4 @@
-// Version1 (Plain Function)
+// version1 (plain function)
 
 const findArrayDimension = array => {
   let maxDimension;
@@ -12,10 +12,10 @@ const findArrayDimension = array => {
       maxDimension = currentDimension;
     }
     // forEach does not make/return a new array.  It works with original array.
-    // And since I'm not making any changes to the original array, and I just want to see how many nested (or dimensions) exist in the array,
+    // since I'm not making any changes to the original array, and I just want to see how many nested (or dimensions) exist in the array,
     // forEach should work fine.
-    // But I prefer to use map to forEach, because map creates/returns a new array and does not mutate the original array.
-    // And this is a standard practice for functional programming.
+    // but I prefer to use map to forEach, because map creates/returns a new array and does not mutate the original array.
+    // this is the standard practice for functional programming.
     subArray.map(element => {
       if (element instanceof Array) {
         recurse(element, currentDimension + 1);
@@ -26,7 +26,7 @@ const findArrayDimension = array => {
   return recurse(array, maxDimension);
 };
 
-// Version2(Implemented);
+// version2(implemented);
 
 Array.prototype.findArrayDimension = function () {
   let maxDimension = 1;
@@ -49,8 +49,6 @@ Array.prototype.findArrayDimension = function () {
   };
   return recurse(this, maxDimension);
 };
-
-console.log([1, 2, 3, [5], []].findArrayDimension());
 
 module.exports = {
   findArrayDimension,

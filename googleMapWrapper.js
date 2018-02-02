@@ -8,10 +8,10 @@ const getDistance = (origin, destination, time) => {
   const originURL = `origins=${origin.split(' ').join('+')}&`;
   const destinationURL = `destinations=${destination.split(' ').join('+')}&`;
 
-  // Assume that 'standard date or time object' described in the assignment is a local time, created with new Date(year, month, date, hour, minute, second).
-  // Since Google API takes departure_time parameter in UTC time, the local time needs to be converted into UTC format.
-  // Simply calling a prototype method, getTime() will automatially convert the Date object into UTC, taking time-zone offset value into account.
-  // If 'standard date or time object' is already UTC time, just simply put ${time} into departureTimeURL instead of ${timeUTC}.
+  // assume that 'standard date or time object' described in the assignment is a local time, created with new Date(year, month, date, hour, minute, second).
+  // since Google API takes departure_time parameter in UTC time, the local time needs to be converted into UTC format.
+  // simply calling a prototype method, getTime() will automatially convert the Date object into UTC, taking time-zone offset value into account.
+  // if 'standard date or time object' is already UTC time, just simply put ${time} into departureTimeURL instead of ${timeUTC}.
   const timeUTC = time.getTime();
   const departureTimeURL = `departure_time=${timeUTC}&`;
 
@@ -36,4 +36,4 @@ const appointment = new Date(2018, 1, 10, 10, 30);
 const distance = getDistance(nearbyAgent, houseProperty, appointment).then(console.log);
 
 // Google Distance Matrix API takes many optional parameters.
-// If we assume this is going to be used
+// if we assume this is going to be used

@@ -1,9 +1,11 @@
+// nodeJS script
+
 const path = require('path');
 const fs = require('fs');
 
 const findAllFiles = (directory, extension, filter) => {
-  // Usually, asynchronous functions are preferred to synchronous.
-  // But for the purpose of this assignment, there is no reason to use asynchronous, and make the code more complex.
+  // usually, asynchronous functions are preferred to synchronous.
+  // but for the purpose of this assignment, there is no reason to use asynchronous, and make the code more complex.
   if (!fs.existsSync(directory)) {
     return 'The Folder Does Not Exist';
   }
@@ -29,4 +31,12 @@ const findAllFiles = (directory, extension, filter) => {
   return fileList;
 };
 
-console.log(findAllFiles('./website', '.html', 'shittylistings.com'));
+const directory = process.argv[2];
+const extension = process.argv[3];
+const filter = process.argv[4];
+
+
+
+
+// console.log(findAllFiles('./website', '.html', 'shittylistings.com'));
+console.log(findAllFiles(directory, extension, filter));

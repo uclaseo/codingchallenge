@@ -6,7 +6,7 @@ describe('findArrayDimension', () => {
     expect(findArrayDimension()).toBe('Input is not a valid array');
     expect(findArrayDimension(1)).toBe('Input is not a valid array');
     expect(findArrayDimension({ array: [] })).toBe('Input is not a valid array');
-    // Since Array.prototype.findArrayDimension is (implemented) prototypal method of Array,
+    // since Array.prototype.findArrayDimension is (implemented) prototypal method of Array,
     // it cannnot be called unless it is an array
   });
   test('Empty array returns 1 dimension', () => {
