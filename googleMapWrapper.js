@@ -20,6 +20,7 @@ const getDistance = (origin, destination, time) => {
   return axios
     .get(query)
     .then(response => {
+      // refer to https://developers.google.com/maps/documentation/distance-matrix/start for the payload structure of the response
       let result = response.data.rows[0].elements[0].distance.text;
       return result;
     })
@@ -33,7 +34,19 @@ const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
 // 2018 Feb 10 10:30
 const appointment = new Date(2018, 1, 10, 10, 30);
 
-const distance = getDistance(nearbyAgent, houseProperty, appointment).then(console.log);
+getDistance(nearbyAgent, houseProperty, appointment)
+  .then((response) => {
+    // response is the distance in miles retrieved from the API call to google.
+    // since axios uses promise, it will return promise.
+    // do something here with the response
+    console.log(response);
+  });
+
 
 // Google Distance Matrix API takes many optional parameters.
-// if we assume this is going to be used
+// one of most useful option that could be implemented would be arrival_time.
+// I assume that many appointments are made at specific time.  In order to arrive by the specific time,
+// it would be helpful to know when is the safe time to leave and start heading from a certain place 
+// also, when departure_time or arrival_time is provided, it responds back with duration_in_traffic,
+// which should be the most important information.
+// it would be a lot more useful if the wrapper could give the travel time with traffic into account.

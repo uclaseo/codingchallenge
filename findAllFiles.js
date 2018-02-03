@@ -26,7 +26,7 @@ const findAllFiles = (directory, extension, filter, option) => {
 
           // find all links that has the filter parameter, and comment it out.
           // this would only work for .html extension, since context for commenting out is specific to HTML.
-          if (option === 'remove') {
+          if (filter === 'html' && option === 'remove') {
             const startingIndex = data.lastIndexOf('<a', data.indexOf(filter));
             const endingIndex = data.indexOf('</a>', data.indexOf(filter)) + 3;
             const newFilter = data.substring(startingIndex, endingIndex + 1);
