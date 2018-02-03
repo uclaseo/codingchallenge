@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { findArrayDimension, Array } = require('./findArrayDimension');
-
+const getDistance = require('./googleMapWrapper');
 describe('findArrayDimension', () => {
   test('Wrong input returns error string', () => {
     expect(findArrayDimension()).toBe('Input is not a valid array');

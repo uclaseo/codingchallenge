@@ -33,18 +33,15 @@ Array.prototype.findArrayDimension = function () {
   if (this.length === 0) {
     return 1;
   }
-  console.log(this);
   const recurse = (subArray, currentDimension) => {
     if (currentDimension > maxDimension) {
       maxDimension = currentDimension;
     }
-    console.log(subArray);
     subArray.map(element => {
       if (Array.isArray(element)) {
         recurse(element, currentDimension + 1);
       }
     });
-    console.log(maxDimension);
     return maxDimension;
   };
   return recurse(this, maxDimension);

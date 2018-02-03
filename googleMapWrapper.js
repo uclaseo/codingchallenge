@@ -9,10 +9,10 @@ const getDistance = (origin, destination, time) => {
   const destinationURL = `destinations=${destination.split(' ').join('+')}&`;
 
   // assume that 'standard date or time object' described in the assignment is a local time, created with new Date(year, month, date, hour, minute, second).
-  // since Google API takes departure_time parameter in UTC time, the local time needs to be converted into UTC format.
-  // simply calling a prototype method, getTime() will automatially convert the Date object into UTC, taking time-zone offset value into account.
+  // since Google API takes departure_time parameter in UTC time in seconds, the local time needs to be converted into UTC format and from milliseconds to seconds.
+  // simply calling a prototype method, rounding down getTime() / 1000 will automatially convert the Date object into UTC in seconds, taking time-zone offset value into account.
   // if 'standard date or time object' is already UTC time, just simply put ${time} into departureTimeURL instead of ${timeUTC}.
-  const timeUTC = time.getTime();
+  const timeUTC = Math.floor(time.getTime() / 1000);
   const departureTimeURL = `departure_time=${timeUTC}&`;
 
   const query = `${BASE_URL}/${outputFormat}${unitsURL}${originURL}${destinationURL}${departureTimeURL}key=${API_KEY}`;
@@ -29,18 +29,21 @@ const getDistance = (origin, destination, time) => {
     });
 };
 
-const nearbyAgent = '178 S Oxford Ave Los Angeles, CA 90004';
+const nearbyAgent = '2114 6th avenue los angeles, ca 90018';
 const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
 // 2018 Feb 10 10:30
-const appointment = new Date(2018, 1, 10, 10, 30);
+const appointment = new Date()
 
 getDistance(nearbyAgent, houseProperty, appointment)
   .then((response) => {
     // response is the distance in miles retrieved from the API call to google.
-    // since axios uses promise, it will return promise.
+    // since axios uses promise, it will return promise with data attached to it.
     // do something here with the response
     console.log(response);
-  });
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 
 
 // Google Distance Matrix API takes many optional parameters.
@@ -50,3 +53,5 @@ getDistance(nearbyAgent, houseProperty, appointment)
 // also, when departure_time or arrival_time is provided, it responds back with duration_in_traffic,
 // which should be the most important information.
 // it would be a lot more useful if the wrapper could give the travel time with traffic into account.
+
+module.exports = getDistance;
