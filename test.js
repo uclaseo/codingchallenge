@@ -1,6 +1,10 @@
 const fs = require('fs');
 const { findArrayDimension, Array } = require('./findArrayDimension');
-const getDistance = require('./googleMapWrapper');
+
+// yarn test 
+// or
+// npm test 
+// in command line
 describe('findArrayDimension', () => {
   test('Wrong input returns error string', () => {
     expect(findArrayDimension()).toBe('Input is not a valid array');
@@ -57,3 +61,19 @@ describe('findArrayDimension', () => {
     expect(['1', [2, { bar: 'foo' }, [3, [null, [undefined]]], '2']].findArrayDimension()).toBe(5);
   });
 });
+
+// I wrote some simple plain testing additionally, just to demonstrate how it could be done.
+const assert = (testName, expected, actual) => {
+  if (expected === actual) {
+    console.log(`${testName} passed.`);
+  } else {
+    console.error(`${testName} failed: expected ${expected}, but got ${actual}`);
+  }
+};
+assert('findArrayDimension: plain function', findArrayDimension([[[], [[]]]]), 4)
+assert('findArrayDimension: plain function', findArrayDimension([1, 1, 1, [2], [2, 2, 2], 1, [2, [3], [3], 2, [3, [4, 'hello', 4, [5]], 3], 2], 1]), 5);
+assert('findArrayDimension: prototypal function', ([[[], [[]]]]).findArrayDimension(), 4);
+assert('findArrayDimension: prototypal function', ([1, 1, 1, [2], [2, 2, 2], 1, [2, [3], [3], 2, [3, [4, 'hello', 4, [5]], 3], 2], 1]).findArrayDimension(), 5);
+
+// failure testing for demonstration
+assert('findArrayDimension: prototypal function', ([1, 1, 1, [2], [2, 2, 2], 1, [2, [3], [3], 2, [3, [4, 'hello', 4, [5]], 3], 2], 1]).findArrayDimension(), 6);

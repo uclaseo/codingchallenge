@@ -10,7 +10,7 @@ const getDistance = (origin, destination, time) => {
 
   // assume that 'standard date or time object' described in the assignment is a local time, created with new Date(year, month, date, hour, minute, second).
   // since Google API takes departure_time parameter in UTC time in seconds, the local time needs to be converted into UTC format and from milliseconds to seconds.
-  // simply calling a prototype method, rounding down getTime() / 1000 will automatially convert the Date object into UTC in seconds, taking time-zone offset value into account.
+  // simply calling a prototype method getTime(), dividing it by 1000, and rounding down the result will convert the Date object into UTC in seconds, taking time-zone offset value into account.
   // if 'standard date or time object' is already UTC time, just simply put ${time} into departureTimeURL instead of ${timeUTC}.
   const timeUTC = Math.floor(time.getTime() / 1000);
   const departureTimeURL = `departure_time=${timeUTC}&`;
@@ -31,14 +31,13 @@ const getDistance = (origin, destination, time) => {
 
 const nearbyAgent = '2114 6th avenue los angeles, ca 90018';
 const houseProperty = '148 S Gramercy Pl Los Angeles, CA 90004';
-// 2018 Feb 10 10:30
 const appointment = new Date()
 
 getDistance(nearbyAgent, houseProperty, appointment)
   .then((response) => {
     // response is the distance in miles retrieved from the API call to google.
     // since axios uses promise, it will return promise with data attached to it.
-    // do something here with the response
+    // do something here with the response, in this case, number of miles.
     console.log(response);
   })
   .catch((error) => {
@@ -47,11 +46,9 @@ getDistance(nearbyAgent, houseProperty, appointment)
 
 
 // Google Distance Matrix API takes many optional parameters.
-// one of most useful option that could be implemented would be arrival_time.
-// I assume that many appointments are made at specific time.  In order to arrive by the specific time,
-// it would be helpful to know when is the safe time to leave and start heading from a certain place 
-// also, when departure_time or arrival_time is provided, it responds back with duration_in_traffic,
-// which should be the most important information.
+// when departure_time or arrival_time is provided, it responds back with duration_in_traffic,
+// which should be the most important information in order to manage travel time successfully.
 // it would be a lot more useful if the wrapper could give the travel time with traffic into account.
-
-module.exports = getDistance;
+// also one of most useful option that could be implemented would be arrival_time.
+// I assume that many appointments are made at specific times.  In order to arrive by the appointment time,
+// knowing ahead when is the safe time to leave and start heading from a current location is crucial.

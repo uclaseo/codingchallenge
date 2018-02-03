@@ -1,11 +1,9 @@
-// nodeJS script
-// node findAllFiles.js ./website html href=\"shittylistings.com\" remove
-
 const path = require('path');
 const fs = require('fs');
 
 const findAllFiles = (directory, extension, filter, option) => {
   // usually, asynchronous functions are preferred to synchronous.
+  // asynchronous is useful when there are other processes need to be done such as http requests.
   // but for the purpose of this assignment, there is no reason to use asynchronous, and make the code more complex.
   if (!fs.existsSync(directory)) {
     return 'The Folder Does Not Exist';
@@ -24,13 +22,14 @@ const findAllFiles = (directory, extension, filter, option) => {
         if (data.indexOf(filter) >= 0) {
           fileList.push(filePath);
 
-          // find all links that has the filter parameter, and comment it out.
-          // this would only work for .html extension, since context for commenting out is specific to HTML.
+          // since team needs to delete all links of interest in 24 hours, 
+          // simply letting computer comment all them out would be useful. 
+          // this would only work for html files, since context for commenting out implemented here is specific to HTML.
           if (filter === 'html' && option === 'remove') {
             const startingIndex = data.lastIndexOf('<a', data.indexOf(filter));
             const endingIndex = data.indexOf('</a>', data.indexOf(filter)) + 3;
-            const newFilter = data.substring(startingIndex, endingIndex + 1);
-            const newData = data.replace(newFilter, `<!-- ${newFilter} -->`);
+            const stringToBeCommented = data.substring(startingIndex, endingIndex + 1);
+            const newData = data.replace(stringToBeCommented, `<!-- ${stringToBeCommented} -->`);
             fs.writeFileSync(filePath, newData);
           }
         }
@@ -46,6 +45,7 @@ const findAllFiles = (directory, extension, filter, option) => {
   return fileList;
 };
 
+// process.argv allows to take in parameters from command line
 const directory = process.argv[2];
 const extension = process.argv[3];
 const filter = process.argv[4];

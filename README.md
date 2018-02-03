@@ -28,3 +28,14 @@ npm test
 or
 yarn test
 ```
+
+## Commands with findAllFiles
+
+findAllFiles will search all folders within given folder, for given extension files, that have contents of interest
+It will take three or four parameters:
+root directory, file extension, contents to look for, and remove option to commenting out the contents(only works for html).
+Example Command:
+
+```
+node findAllFiles.js ./website html href=\"shittylistings.com\" remove
+```

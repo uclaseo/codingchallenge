@@ -26,7 +26,7 @@ const findArrayDimension = array => {
   return recurse(array, maxDimension);
 };
 
-// version2(implemented);
+// version2(implemented into Array);
 
 Array.prototype.findArrayDimension = function () {
   let maxDimension = 1;
@@ -51,3 +51,13 @@ module.exports = {
   findArrayDimension,
   Array
 };
+
+// time complexity: O(N)
+// this could be tricky, since we do not know for sure what N is.  
+// if N is number of total elements in the array including its children, it would be O(N).
+// if N is number of dimension, it could mean O(N^2), since number of dimensions increase number of nested arrays.
+
+// space complexity: O(N)
+// .map creates a new array everytime it's being called.
+// in the worst case scenario where number of dimensions is equal to total elements in the array including its children,
+// it will create a number of new arrays equal to the number of total elements.
